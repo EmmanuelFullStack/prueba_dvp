@@ -71,9 +71,21 @@ exports.markAsPaid = async (req, res) => {
 exports.exportDebts = async (req, res) => {
     try {
         const debts = await Debt.getByUserId(req.user.id);
-        res.setHeader('Content-Disposition', 'attachment; filename=deudas.json');
-        res.set('Content-Type', 'application/json');
-        res.send(JSON.stringify(debts, null, 2));
+        const format = req.query.format || 'json'; // Default a JSON si no se especifica
+
+        if (format === 'csv') {
+            const csv = [
+                'id,description,amount,paid',
+                ...debts.map(debt => `${debt.id},${debt.description},${debt.amount},${debt.paid}`),
+            ].join('\n');
+            res.setHeader('Content-Disposition', 'attachment; filename=deudas.csv');
+            res.set('Content-Type', 'text/csv');
+            res.send(csv);
+        } else {
+            res.setHeader('Content-Disposition', 'attachment; filename=deudas.json');
+            res.set('Content-Type', 'application/json');
+            res.send(JSON.stringify(debts, null, 2));
+        }
     } catch (error) {
         logger.error(`Error exportando deudas: ${error.message}`);
         res.status(500).json({ error: error.message });

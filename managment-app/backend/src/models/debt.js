@@ -19,6 +19,8 @@ class Debt {
 
         const result = await pool.query('SELECT * FROM debts WHERE user_id = $1 ORDER BY id DESC', [userId]);
         debts = result.rows;
+        console.log("Debts fetched from DB:", debts); // Debugging line
+
         cache.set(cacheKey, debts);
         return debts;
     }
