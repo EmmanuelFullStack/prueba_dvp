@@ -53,8 +53,11 @@ CREATE TABLE debts (
 
 # Instalación de dependencias
 cd backend
+
 npm install
+
 configurar archivo .env de acuerdo a su servidor: 
+
 DB_USER=
 DB_HOST=
 DB_NAME= debt_management
@@ -62,17 +65,21 @@ DB_PASSWORD=
 DB_PORT=
 
 cd ../frontend/managment-ui
+
 npm install
 
 # Iniciar aplicación
 cd backend
+
 npm start
 
 cd ../frontend/managment-ui
+
 npm start
 
 # Ejecución de pruebas unitarias - backend
 cd backend
+
 npm test
 
 # Uso
