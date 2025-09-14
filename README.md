@@ -28,13 +28,14 @@ Esta aplicación web, desarrollada como parte de la prueba técnica para Double 
 
 1. **Clonar el Repositorio**
    
-   git clone https://github.com/EmmanuelFullStack/prueba_dvp.git
-   \cd managment-app
+git clone https://github.com/EmmanuelFullStack/prueba_dvp.git
 
-   \Abrir pgAdmin y conectar con su servidor y ejecutar las siguientes sentencias:
-   \CREATE DATABASE debt_management;
 
-\connect debt_management;
+Abrir pgAdmin y conectar con su servidor y ejecutar las siguientes sentencias:
+   
+CREATE DATABASE debt_management;
+
+connect debt_management;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
