@@ -32,7 +32,7 @@ Esta aplicación web, desarrollada como parte de la prueba técnica para Double 
    cd managment-app
 
    Abrir pgAdmin y conectar con su servidor y ejecutar las siguientes sentencias:
-   CREATE DATABASE debt_management_test;
+   CREATE DATABASE debt_management;
 
 \connect debt_management;
 
