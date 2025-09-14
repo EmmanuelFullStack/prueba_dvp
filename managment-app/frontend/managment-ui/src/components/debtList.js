@@ -40,37 +40,42 @@ function DebtList() {
     };
 
     return (
-        <div className="container mx-auto p-4">
-            <h2 className="text-2xl mb-4">Mis Deudas</h2>
+        <div className="container mx-auto p-4 md:p-8">
+            <h2 className="text-2xl font-bold mb-6 text-primary">Mis Deudas</h2>
             {error && <p className="text-red-500 mb-4">{error}</p>}
-            <select
-                onChange={(e) => setFilter(e.target.value)}
-                className="mb-4 p-2 border rounded"
-            >
-                <option value="all">Todas</option>
-                <option value="pending">Pendientes</option>
-                <option value="paid">Pagadas</option>
-            </select>
-            <ul className="list-disc pl-5">
-                {filteredDebts.map((debt) => (
-                    <li key={debt.id} className="py-2 flex justify-between">
-                        <Link to={`/debt/${debt.id}`}>{debt.description} - ${debt.amount} {debt.paid ? '(Pagada)' : '(Pendiente)'}</Link>
-                        {!debt.paid && <Link to={`/debt/${debt.id}/edit`} className="text-blue-500 ml-4">Editar</Link>}
-                    </li>
-                ))}
-            </ul>
-            <div className="mt-4">
+            <div className="flex flex-wrap items-center space-x-2 mb-4">
+                <select
+                    onChange={(e) => setFilter(e.target.value)}
+                    className="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-secondary"
+                >
+                    <option value="all">Todas</option>
+                    <option value="pending">Pendientes</option>
+                    <option value="paid">Pagadas</option>
+                </select>
                 <select
                     value={exportFormat}
                     onChange={(e) => setExportFormat(e.target.value)}
-                    className="mb-4 p-2 border rounded mr-2"
+                    className="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-secondary"
                 >
                     <option value="json">JSON</option>
                     <option value="csv">CSV</option>
                 </select>
-                <button onClick={handleExport} className="bg-green-500 text-white p-2 inline-block">Exportar Deudas</button>
+                <button onClick={handleExport} className="bg-green-500 hover:bg-green-600 text-white p-2 rounded transition duration-300">Exportar Deudas</button>
             </div>
-            <Link to="/debt/new" className="bg-blue-500 text-white p-2 mt-4 inline-block">Nueva Deuda</Link>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {filteredDebts.map((debt) => (
+                    <div key={debt.id} className="bg-white p-4 rounded-lg shadow-md flex flex-col justify-between">
+                        <Link to={`/debt/${debt.id}`} className="text-lg font-semibold hover:text-secondary">
+                            {debt.description}
+                        </Link>
+                        <p className="text-gray-600">${debt.amount} {debt.paid ? '(Pagada)' : '(Pendiente)'}</p>
+                        {!debt.paid && (
+                            <Link to={`/debt/${debt.id}/edit`} className="text-blue-500 hover:underline mt-2">Editar</Link>
+                        )}
+                    </div>
+                ))}
+            </div>
+            <Link to="/debt/new" className="bg-primary hover:bg-secondary text-white p-2 rounded inline-block mt-6 transition duration-300">Nueva Deuda</Link>
         </div>
     );
 }

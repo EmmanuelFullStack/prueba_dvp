@@ -40,16 +40,16 @@ function DebtForm() {
     };
 
     return (
-        <div className="container mx-auto p-4">
-            <h2 className="text-2xl mb-4">{id ? 'Editar Deuda' : 'Nueva Deuda'}</h2>
+        <div className="container mx-auto p-4 md:p-8">
+            <h2 className="text-2xl font-bold mb-6 text-primary">{id ? 'Editar Deuda' : 'Nueva Deuda'}</h2>
             {error && <p className="text-red-500 mb-4">{error}</p>}
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md max-w-md mx-auto">
                 <input
                     type="number"
                     value={amount}
                     onChange={(e) => setAmount(parseFloat(e.target.value))}
                     placeholder="Monto"
-                    className="mb-4 p-2 border w-full"
+                    className="mb-4 p-2 border rounded w-full focus:outline-none focus:ring-2 focus:ring-secondary"
                     required
                     min="1"
                 />
@@ -58,10 +58,10 @@ function DebtForm() {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="Descripción"
-                    className="mb-4 p-2 border w-full"
+                    className="mb-4 p-2 border rounded w-full focus:outline-none focus:ring-2 focus:ring-secondary"
                     required
                 />
-                <button type="submit" className="bg-green-500 text-white p-2 w-full">Guardar</button>
+                <button type="submit" className="bg-green-500 hover:bg-green-600 text-white p-2 rounded w-full transition duration-300">Guardar</button>
             </form>
         </div>
     );

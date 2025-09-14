@@ -33,23 +33,31 @@ function Home() {
     };
 
     return (
-        <div className="container mx-auto p-4">
-            <h1 className="text-3xl mb-4">Dashboard de Deudas</h1>
+        <div className="container mx-auto p-4 md:p-8">
+            <h1 className="text-3xl font-bold mb-6 text-primary">Dashboard de Deudas</h1>
             {error && <p className="text-red-500 mb-4">{error}</p>}
-            <p><strong>Total Pagadas:</strong> ${summary.totalPagadas}</p>
-            <p><strong>Saldo Pendiente:</strong> ${summary.saldoPendiente}</p>
-            <div className="mt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                <div className="bg-white p-4 rounded-lg shadow-md">
+                    <p className="text-lg font-semibold">Total Pagadas:</p>
+                    <p className="text-2xl text-secondary">${summary.totalPagadas}</p>
+                </div>
+                <div className="bg-white p-4 rounded-lg shadow-md">
+                    <p className="text-lg font-semibold">Saldo Pendiente:</p>
+                    <p className="text-2xl text-secondary">${summary.saldoPendiente}</p>
+                </div>
+            </div>
+            <div className="flex flex-wrap items-center space-x-2 mb-4">
                 <select
                     value={exportFormat}
                     onChange={(e) => setExportFormat(e.target.value)}
-                    className="mb-4 p-2 border rounded mr-2"
+                    className="p-2 border rounded focus:outline-none focus:ring-2 focus:ring-secondary"
                 >
                     <option value="json">JSON</option>
                     <option value="csv">CSV</option>
                 </select>
-                <button onClick={handleExport} className="bg-green-500 text-white p-2 inline-block">Exportar Deudas</button>
+                <button onClick={handleExport} className="bg-green-500 hover:bg-green-600 text-white p-2 rounded transition duration-300">Exportar Deudas</button>
             </div>
-            <Link to="/debts" className="bg-blue-500 text-white p-2 mt-4 inline-block">Ver Deudas</Link>
+            <Link to="/debts" className="bg-primary hover:bg-secondary text-white p-2 rounded inline-block transition duration-300">Ver Deudas</Link>
         </div>
     );
 }
