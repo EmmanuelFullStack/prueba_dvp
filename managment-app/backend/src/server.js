@@ -1,16 +1,15 @@
 require('dotenv').config();
 const express = require('express');
-const path = require('path');
 const logger = require('./config/logger');
 const errorHandler = require('./middleware/errorHandler');
 const { connectDB } = require('./config/database');
 
 const app = express();
 
-// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(errorHandler);
 
 // Conectar a la base de datos
 connectDB()
@@ -22,6 +21,8 @@ connectDB()
         process.exit(1);
     });
 
+// Rutas
+app.use('/api/auth', authRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
